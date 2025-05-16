@@ -20,10 +20,9 @@ private:
 
 public:
 
-	Tile() = default;
-	Tile(TileType t, const sf::Texture& texture, sf::Vector2f position) : type(t);
+	Tile(TileType t, const sf::Texture& texture, sf::Vector2f position);
 
-	~Tile();
+	~Tile() = default;
 
 	void draw(sf::RenderWindow& window) const;
 

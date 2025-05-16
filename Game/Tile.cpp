@@ -28,10 +28,10 @@ Tile::Tile(TileType t, const sf::Texture& texture, sf::Vector2f position) : type
 	}
 }
 
-Tile::~Tile()
-{
-	delete sprite;
-}
+//Tile::~Tile()
+//{
+//	delete this->sprite;
+//}
 
 void Tile::draw(sf::RenderWindow& window) const
 {

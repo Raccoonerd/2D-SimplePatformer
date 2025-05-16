@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{899d32ed-22e2-44ee-b181-94f157addb9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\LevelsMaps">
+      <UniqueIdentifier>{40553737-74b7-4d20-b64d-5d9dd2ec8ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Sprites">
+      <UniqueIdentifier>{b5616766-c599-445d-ae80-ffb733262abe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -35,5 +44,10 @@
     <ClInclude Include="TileMap.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\LevelsMaps\maplvl1.ini">
+      <Filter>Assets\LevelsMaps</Filter>
+    </None>
   </ItemGroup>
 </Project>
