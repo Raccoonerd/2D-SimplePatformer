@@ -13,8 +13,8 @@ private:
 public:
 
 	TileMap() = default;
-	TileMap(const std::string& filename, const sf::Texture& tileTexture);
 	~TileMap() = default;
+	bool loadFromFile(const std::string& filename);
 	void draw(sf::RenderWindow& window) const;
 	const Tile* getTileAt(sf::Vector2f position) const;
 	unsigned int getTileSize() const;

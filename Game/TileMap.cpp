@@ -1,13 +1,13 @@
 #include "TileMap.h"
 
-TileMap::TileMap(const std::string& filename, const sf::Texture& tileTexture)
+bool TileMap::loadFromFile(const std::string& filename)
 {
 	tiles.clear();
 	std::ifstream file(filename);
 	if (!file.is_open())
 	{
 		std::cerr << "Error opening file: " << filename << std::endl;
-		return;
+		return false;
 	}
 
 	std::string line;
@@ -30,7 +30,7 @@ TileMap::TileMap(const std::string& filename, const sf::Texture& tileTexture)
 				case '.': default: type = TileType::Empty; break;
 			}
 			sf::Vector2f position(x * tileSize, y * tileSize);
-			tiles.emplace_back(type, tileTexture, position);
+			tiles.emplace_back(type, position);
 		}
 
 		++y;
@@ -38,6 +38,7 @@ TileMap::TileMap(const std::string& filename, const sf::Texture& tileTexture)
 	}
 	height = y;
 	file.close();
+	return true;
 }
 
 void TileMap::draw(sf::RenderWindow& window) const
@@ -59,6 +60,11 @@ const Tile* TileMap::getTileAt(sf::Vector2f position) const
 	}
 
 	return &tiles[y * width + x];
+}
+
+unsigned int TileMap::getTileSize() const
+{
+	return tileSize;
 }
 
 sf::Vector2u TileMap::getMapSize() const
