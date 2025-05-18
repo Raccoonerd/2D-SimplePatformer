@@ -12,13 +12,12 @@ enum class TileType
 
 class Tile
 {
-private:
+public:
 
 	TileType type = TileType::Empty;
 	bool isSolid = false;
 	sf::Sprite* sprite;
 
-public:
 
 	Tile(TileType t, const sf::Texture& texture, sf::Vector2f position);
 
