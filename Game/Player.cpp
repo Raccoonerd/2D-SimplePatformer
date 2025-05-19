@@ -4,7 +4,7 @@ Player::Player(const sf::Texture& texture, const sf::Vector2f startPos)
 	: Entity(texture, startPos)
 {
 	sprite = new sf::Sprite(texture);
-	sprite->setTextureRect(sf::IntRect({ 0, 0 }, { 32, 32 }));
+	sprite->setTextureRect(sf::IntRect({ 0, 0 }, {32, 32}));
 	position = startPos;	
 	sprite->setPosition(startPos);
 	velocity = { 0.f, 0.f };
