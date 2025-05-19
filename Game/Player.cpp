@@ -48,56 +48,54 @@ void Player::update(float dt, const TileMap& tileMap)
 
 void Player::resolveCollision(const TileMap& tileMap, bool horizontal)
 {
-	sf::FloatRect playerBounds = getBounds();
+    sf::FloatRect playerBounds = getBounds();
+    int tileSize = tileMap.getTileSize();
+    int startX = static_cast<int>(playerBounds.position.x / tileSize);
+    int endX = static_cast<int>((playerBounds.position.x + playerBounds.size.x) / tileSize);
+    int startY = static_cast<int>(playerBounds.position.y / tileSize);
+    int endY = static_cast<int>((playerBounds.position.y + playerBounds.size.y) / tileSize);
 
-	// sprawdzanie najbli¿szych 4 kafelków
-	int tileSize = tileMap.getTileSize();
-	int startX = static_cast<int>(playerBounds.position.x / tileSize);
-	int endX = static_cast<int>((playerBounds.position.x + playerBounds.size.x) / tileSize);
-	int startY = static_cast<int>(playerBounds.position.y / tileSize);
-	int endY = static_cast<int>((playerBounds.position.y + playerBounds.size.y) / tileSize);
+    constexpr float epsilon = 0.001f;
 
-	for (int y = startY; y <= endY; y++)
-	{
-		for (int x = startX; x <= endX; x++)
-		{
-			const Tile* tile = tileMap.getTileAt({ x * (float)tileSize, y * (float)tileSize });
-			if (tile && tile->isSolid)
-			{
-					sf::FloatRect tileBounds = tile->getBounds();
+    for (int y = startY; y <= endY; y++)
+    {
+        for (int x = startX; x <= endX; x++)
+        {
+            const Tile* tile = tileMap.getTileAt({ x * (float)tileSize, y * (float)tileSize });
+            if (tile && tile->isSolid)
+            {
+                sf::FloatRect tileBounds = tile->getBounds();
 
-				if (playerBounds.findIntersection(tileBounds))
-				{
-					if (horizontal)
-					{
-						if (velocity.x > 0)
-						{
-							position.x = tileBounds.position.x - playerBounds.size.x;
-						}
-						else if (velocity.x < 0)
-						{
-							position.x = tileBounds.position.x + tileBounds.size.x;
-						}
-						velocity.x = 0.f;
-					}
-					else
-					{
-						if (velocity.y > 0)
-						{
-							position.y = tileBounds.position.y - playerBounds.size.y;
-							isOnGround = true;
-						}
-						else if (velocity.y < 0)
-						{
-							position.y = tileBounds.position.y + tileBounds.size.y;
-						}
-						velocity.y = 0.f;
-					}
-					sprite->setPosition(position);
-					playerBounds = getBounds();
+                if (playerBounds.position.x < tileBounds.position.x + tileBounds.size.x &&
+                    playerBounds.position.x + playerBounds.size.x > tileBounds.position.x &&
+                    playerBounds.position.y < tileBounds.position.y + tileBounds.size.y &&
+                    playerBounds.position.y + playerBounds.size.y > tileBounds.position.y)
 
-				}
-			}
-		}
-	}
+                {
+                    if (horizontal)
+                    {
+                        if (velocity.x > 0)
+                            position.x = tileBounds.position.x - playerBounds.size.x - epsilon;
+                        else if (velocity.x < 0)
+                            position.x = tileBounds.position.x + tileBounds.size.x + epsilon;
+                        velocity.x = 0.f;
+                    }
+                    else
+                    {
+                        if (velocity.y > 0)
+                        {
+                            position.y = tileBounds.position.y - playerBounds.size.y - epsilon;
+                            isOnGround = true;
+                        }
+                        else if (velocity.y < 0)
+                            position.y = tileBounds.position.y + tileBounds.size.y + epsilon;
+                        velocity.y = 0.f;
+                    }
+                    sprite->setPosition(position);
+                    playerBounds = getBounds();
+                    return;
+                }
+            }
+        }
+    }
 }
