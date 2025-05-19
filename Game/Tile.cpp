@@ -1,11 +1,10 @@
 #include "Tile.h"
 
-sf::Sprite* Tile::sprite = nullptr;
-
-Tile::Tile(TileType t, sf::Vector2f position) : type(t)
+Tile::Tile(TileType t, const sf::Texture& texture ,sf::Vector2f position) : type(t)
 {
 	isSolid = (t == TileType::Ground || t == TileType::Platform || t == TileType::Spikes);
 
+	sprite = new sf::Sprite(texture);
 	sprite->setPosition(position);
 
 	switch (type)

@@ -16,7 +16,8 @@ private:
 
 public:
 	bool load(const std::string& tilemapFile, const sf::Texture& playerTexture,
-		const sf::Texture& enemyTexture, const sf::Texture& collectibleTexture);
+		const sf::Texture& enemyTexture, const sf::Texture& collectibleTexture,
+		const sf::Texture& tilesetTexture);
 	void update(float dt);
 	void draw(sf::RenderWindow& window);
 	Player* getPlayer() const;

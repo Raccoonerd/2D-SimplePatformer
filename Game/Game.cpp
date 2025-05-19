@@ -16,9 +16,8 @@ bool Game::init()
 		return false;
 	}
 
-	Tile::sprite = new sf::Sprite(tilesetTexture);
 	
-	if (!level.load("Assets/LevelsMaps/maplvl1.ini", playerTexture, enemyTexture, coinTexture))
+	if (!level.load("Assets/LevelsMaps/maplvl1.ini", playerTexture, enemyTexture, coinTexture, tilesetTexture))
 	{
 		return false;
 	}
@@ -55,6 +54,7 @@ void Game::update(float dt)
 
 void Game::render()
 {
+
 	window.clear();
 	level.draw(window);
 	window.display();

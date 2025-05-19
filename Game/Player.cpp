@@ -62,40 +62,41 @@ void Player::resolveCollision(const TileMap& tileMap, bool horizontal)
 		for (int x = startX; x <= endX; x++)
 		{
 			const Tile* tile = tileMap.getTileAt({ x * (float)tileSize, y * (float)tileSize });
-			if (!tile || !tile->isSolid) continue;
-
-			sf::FloatRect tileBounds = tile->getBounds();
-
-			if (playerBounds.findIntersection(tileBounds))
+			if (tile && tile->isSolid)
 			{
-				if (horizontal)
-				{
-					if (velocity.x > 0)
-					{
-						position.x = tileBounds.position.x - playerBounds.size.x;
-					}
-					else if (velocity.x < 0)
-					{
-						position.x = tileBounds.position.x + tileBounds.size.x;
-					}
-					velocity.x = 0.f;
-				}
-				else
-				{
-					if (velocity.y > 0)
-					{
-						position.y = tileBounds.position.y - playerBounds.size.y;
-						isOnGround = true;
-					}
-					else if (velocity.y < 0)
-					{
-						position.y = tileBounds.position.y + tileBounds.size.y;
-					}
-					velocity.y = 0.f;
-				}
-				sprite->setPosition(position);
-				playerBounds = getBounds();
+					sf::FloatRect tileBounds = tile->getBounds();
 
+				if (playerBounds.findIntersection(tileBounds))
+				{
+					if (horizontal)
+					{
+						if (velocity.x > 0)
+						{
+							position.x = tileBounds.position.x - playerBounds.size.x;
+						}
+						else if (velocity.x < 0)
+						{
+							position.x = tileBounds.position.x + tileBounds.size.x;
+						}
+						velocity.x = 0.f;
+					}
+					else
+					{
+						if (velocity.y > 0)
+						{
+							position.y = tileBounds.position.y - playerBounds.size.y;
+							isOnGround = true;
+						}
+						else if (velocity.y < 0)
+						{
+							position.y = tileBounds.position.y + tileBounds.size.y;
+						}
+						velocity.y = 0.f;
+					}
+					sprite->setPosition(position);
+					playerBounds = getBounds();
+
+				}
 			}
 		}
 	}

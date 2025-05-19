@@ -74,4 +74,12 @@
       <Filter>Assets\LevelsMaps</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Sprites\player.png">
+      <Filter>Assets\Sprites</Filter>
+    </Image>
+    <Image Include="Assets\Sprites\tileset.png">
+      <Filter>Assets\Sprites</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
