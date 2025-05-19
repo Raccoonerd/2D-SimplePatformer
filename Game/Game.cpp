@@ -55,7 +55,7 @@ void Game::update(float dt)
 void Game::render()
 {
 
-	window.clear();
+	window.clear(sf::Color(120, 161,227));
 	level.draw(window);
 	window.display();
 }

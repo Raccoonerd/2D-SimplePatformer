@@ -75,20 +75,24 @@ void Player::resolveCollision(const TileMap& tileMap, bool horizontal)
                     if (horizontal)
                     {
                         if (velocity.x > 0)
-                            position.x = tileBounds.position.x - playerBounds.size.x - epsilon;
+                            velocity.x = 0;
+                        //position.x = tileBounds.position.x - playerBounds.size.x - epsilon;
                         else if (velocity.x < 0)
-                            position.x = tileBounds.position.x + tileBounds.size.x + epsilon;
+                            velocity.x = 0;
+                            //position.x = tileBounds.position.x + tileBounds.size.x + epsilon;
                         velocity.x = 0.f;
                     }
                     else
                     {
                         if (velocity.y > 0)
                         {
+							velocity.y = 0;
                             position.y = tileBounds.position.y - playerBounds.size.y - epsilon;
                             isOnGround = true;
                         }
                         else if (velocity.y < 0)
-                            position.y = tileBounds.position.y + tileBounds.size.y + epsilon;
+							velocity.y = 0;
+                            //position.y = tileBounds.position.y + tileBounds.size.y + epsilon;
                         velocity.y = 0.f;
                     }
                     sprite->setPosition(position);
