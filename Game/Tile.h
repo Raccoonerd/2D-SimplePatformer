@@ -16,10 +16,10 @@ public:
 
 	TileType type = TileType::Empty;
 	bool isSolid = false;
-	sf::Sprite* sprite;
+	static sf::Sprite* sprite;
 
 
-	Tile(TileType t, const sf::Texture& texture, sf::Vector2f position);
+	Tile(TileType t, sf::Vector2f position);
 
 	~Tile() = default;
 

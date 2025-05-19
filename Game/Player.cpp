@@ -1,6 +1,7 @@
 #include "Player.h"
 
 Player::Player(const sf::Texture& texture, const sf::Vector2f startPos)
+	: Entity(texture, startPos)
 {
 	sprite = new sf::Sprite(texture);
 	sprite->setTextureRect(sf::IntRect({ 0, 0 }, { 32, 32 }));
@@ -15,10 +16,12 @@ void Player::handleInput()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
+		//std::cout << "Left\n";
 		velocity.x -= speed;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
+		//std::cout << "Right\n";
 		velocity.x += speed;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && isOnGround)

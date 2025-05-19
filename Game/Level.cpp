@@ -24,7 +24,7 @@ void Level::update(float dt)
 {
 	if (player)
 	{
-		player->update(dt);
+		player->update(dt, tileMap);
 	}
 
 	/*for (auto& enemy : enemies)

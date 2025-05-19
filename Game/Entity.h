@@ -11,6 +11,8 @@ protected:
 
 public:
 
+	Entity(const sf::Texture& texture, const sf::Vector2f pos);
+
 	virtual ~Entity() { delete sprite; };
 
 	virtual void update(float dt) = 0;

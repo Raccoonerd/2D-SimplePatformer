@@ -22,6 +22,7 @@ public:
 
 private:
 
+	void onCollision(Entity* other) override {};
 	void resolveCollision(const TileMap& tileMap, bool horizontal);
 
 

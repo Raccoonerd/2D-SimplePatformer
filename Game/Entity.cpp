@@ -1,5 +1,13 @@
 #include "Entity.h"
 
+Entity::Entity(const sf::Texture& texture, const sf::Vector2f pos)
+{
+	position = pos;
+	velocity = { 0.f,0.f };
+	sprite = new sf::Sprite(texture);
+	sprite->setPosition(pos);
+}
+
 void Entity::draw(sf::RenderWindow& window) const
 {
 	window.draw(*sprite);

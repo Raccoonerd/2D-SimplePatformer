@@ -1,10 +1,11 @@
 #include "Tile.h"
 
-Tile::Tile(TileType t, const sf::Texture& texture, sf::Vector2f position) : type(t)
+sf::Sprite* Tile::sprite = nullptr;
+
+Tile::Tile(TileType t, sf::Vector2f position) : type(t)
 {
 	isSolid = (t == TileType::Ground || t == TileType::Platform || t == TileType::Spikes);
 
-	sprite = new sf::Sprite(texture);
 	sprite->setPosition(position);
 
 	switch (type)
@@ -28,10 +29,6 @@ Tile::Tile(TileType t, const sf::Texture& texture, sf::Vector2f position) : type
 	}
 }
 
-//Tile::~Tile()
-//{
-//	delete this->sprite;
-//}
 
 void Tile::draw(sf::RenderWindow& window) const
 {
