@@ -8,7 +8,7 @@ class Player :
 private:
 
     float speed = 150.f;
-	float jumpForce = 100.f;
+	float jumpForce = 250.f;
 	float gravity = 300.f;
 	bool isOnGround = false;
 

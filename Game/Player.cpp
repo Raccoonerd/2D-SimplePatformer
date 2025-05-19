@@ -24,7 +24,7 @@ void Player::handleInput()
 		//std::cout << "Right\n";
 		velocity.x += speed;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && isOnGround)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && isOnGround)
 	{
 		velocity.y = -jumpForce;
 		isOnGround = false;

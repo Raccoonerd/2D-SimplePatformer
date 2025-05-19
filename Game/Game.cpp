@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : window(sf::VideoMode({ 800, 600 }), "Platformer Game")
+Game::Game() : window(sf::VideoMode({ 640, 320 }), "Platformer Game")
 {
 	window.setFramerateLimit(60);
 }
