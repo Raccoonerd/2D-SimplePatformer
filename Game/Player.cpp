@@ -49,6 +49,8 @@ void Player::update(float dt, const TileMap& tileMap)
 void Player::resolveCollision(const TileMap& tileMap, bool horizontal)
 {
     sf::FloatRect playerBounds = getBounds();
+	sf::Vector2f positionBefore = sprite->getPosition();
+
     int tileSize = tileMap.getTileSize();
     int startX = static_cast<int>(playerBounds.position.x / tileSize);
     int endX = static_cast<int>((playerBounds.position.x + playerBounds.size.x) / tileSize);
@@ -87,7 +89,7 @@ void Player::resolveCollision(const TileMap& tileMap, bool horizontal)
                         if (velocity.y > 0)
                         {
 							velocity.y = 0;
-                            position.y = tileBounds.position.y - playerBounds.size.y - epsilon;
+							position.y = tileBounds.position.y - playerBounds.size.y;
                             isOnGround = true;
                         }
                         else if (velocity.y < 0)

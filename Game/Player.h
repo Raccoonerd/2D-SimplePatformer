@@ -7,9 +7,9 @@ class Player :
 {
 private:
 
-    float speed = 150.f;
+    float speed = 200.f;
 	float jumpForce = 250.f;
-	float gravity = 300.f;
+	float gravity = 500.f;
 	bool isOnGround = false;
 
 public:
