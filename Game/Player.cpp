@@ -52,10 +52,10 @@ void Player::resolveCollision(const TileMap& tileMap, bool horizontal)
 	sf::Vector2f positionBefore = sprite->getPosition();
 
     int tileSize = tileMap.getTileSize();
-    int startX = static_cast<int>(playerBounds.position.x / tileSize);
-    int endX = static_cast<int>((playerBounds.position.x + playerBounds.size.x) / tileSize);
-    int startY = static_cast<int>(playerBounds.position.y / tileSize);
-    int endY = static_cast<int>((playerBounds.position.y + playerBounds.size.y) / tileSize);
+    int startX = static_cast<int>(playerBounds.left / tileSize);
+    int endX = static_cast<int>((playerBounds.left + playerBounds.width) / tileSize);
+    int startY = static_cast<int>(playerBounds.top / tileSize);
+    int endY = static_cast<int>((playerBounds.top + playerBounds.height) / tileSize);
 
     constexpr float epsilon = 0.001f;
 
@@ -68,34 +68,40 @@ void Player::resolveCollision(const TileMap& tileMap, bool horizontal)
             {
                 sf::FloatRect tileBounds = tile->getBounds();
 
-                if (playerBounds.position.x < tileBounds.position.x + tileBounds.size.x &&
-                    playerBounds.position.x + playerBounds.size.x > tileBounds.position.x &&
-                    playerBounds.position.y < tileBounds.position.y + tileBounds.size.y &&
-                    playerBounds.position.y + playerBounds.size.y > tileBounds.position.y)
-
+                if (playerBounds.left < tileBounds.left + tileBounds.width &&
+                    playerBounds.left + playerBounds.width > tileBounds.left &&
+                    playerBounds.top < tileBounds.top + tileBounds.height &&
+                    playerBounds.top + playerBounds.height > tileBounds.top)
                 {
                     if (horizontal)
                     {
-                        if (velocity.x > 0)
-                            velocity.x = 0;
-                        //position.x = tileBounds.position.x - playerBounds.size.x - epsilon;
-                        else if (velocity.x < 0)
-                            velocity.x = 0;
-                            //position.x = tileBounds.position.x + tileBounds.size.x + epsilon;
-                        velocity.x = 0.f;
-                    }
-                    else
-                    {
-                        if (velocity.y > 0)
+                        if (velocity.x > 0) // Moving right
                         {
-							velocity.y = 0;
-							position.y = tileBounds.position.y - playerBounds.size.y;
+                            position.x = tileBounds.left - playerBounds.width - epsilon;
+                            velocity.x = 0.f;
+                        }
+                        else if (velocity.x < 0) // Moving left
+                        {
+                            position.x = tileBounds.left + tileBounds.width + epsilon;
+                            velocity.x = 0.f;
+                        }
+                        // The specific velocity.x = 0.f assignments above make the unconditional one below redundant.
+                        // The original unconditional velocity.x = 0.f; is removed by not re-adding it here.
+                    }
+                    else // Vertical collision
+                    {
+                        if (velocity.y > 0) // Moving down
+                        {
+							velocity.y = 0; 
+							position.y = tileBounds.top - playerBounds.height; // Corrected for sf::FloatRect
                             isOnGround = true;
                         }
-                        else if (velocity.y < 0)
-							velocity.y = 0;
-                            //position.y = tileBounds.position.y + tileBounds.size.y + epsilon;
-                        velocity.y = 0.f;
+                        else if (velocity.y < 0) // Moving up
+                        {
+							velocity.y = 0.f; // Ensure it's set, using .f for consistency
+                            position.y = tileBounds.top + tileBounds.height + epsilon; // Modified as per task
+                        }
+                        // The unconditional velocity.y = 0.f has been removed as each branch now handles it.
                     }
                     sprite->setPosition(position);
                     playerBounds = getBounds();
